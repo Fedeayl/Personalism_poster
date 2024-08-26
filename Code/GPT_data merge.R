@@ -1,4 +1,4 @@
-#### Model GPT model
+#### Data for GPT models ####
 
 # Merge classification
 
@@ -57,7 +57,9 @@ results <- new_data %>%
         ) %>%
         ungroup() 
 
-names(results)
+results <- results[results$Votes_perc > 0.10,]
+
+
 
 country <- results %>%
         group_by(Country, Candidate, Year)  %>%
@@ -72,5 +74,5 @@ country_ag <- country %>%
 country_data <- country_ag
 candidate_data <- country
 
-rio::export(candidate_data,here::here("Data", "GPT_candidates.csv"), format="csv")
+rio::export(candidate_data,here::here("Data", "GPT_candidates_all.csv"), format="csv")
 rio::export(country_data,here::here("Data", "GPT_country.csv"), format="csv")
